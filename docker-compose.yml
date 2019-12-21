@@ -1,0 +1,77 @@
+version: "3"
+
+services:
+  # mongo:
+  #   image: mongo
+  #   restart: "always"
+  #   volumes:
+  #     - ./api/dbcache/mongo/data:/data/db
+  #   ports:
+  #     - "27018:27017"
+  #   networks:
+  #     net_back:
+  #       ipv4_address: 10.5.0.5
+
+  # redis:
+  #   image: redis:alpine3.10
+  #   volumes:
+  #     - ./api/dbcache/redis/data/db:/data
+  #   ports:
+  #     - "6380:6379"
+  #   networks:
+  #     net_back:
+  #       ipv4_address: 10.5.0.4
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "@epics"
+      MYSQL_DATABASE: "epics"
+    ports:
+      - "3300:3306"
+    volumes:
+      - ./api/dbcache/mysql/data/db:/var/lib/mysql
+    networks:
+      net_back:
+        ipv4_address: 10.5.0.3
+
+  # api:
+  #   image: node:10.16
+  #   ports:
+  #     - "3003:3000"
+  #   working_dir: "/home/node/app"
+  #   volumes:
+  #     - ./api:/home/node/app
+  #   command: "yarn dev"
+  #   networks:
+  #     net_back:
+  #       ipv4_address: 10.5.0.2
+  # queue:
+  #   image: node:10.16
+  #   ports:
+  #     - "3002:3000"
+  #   working_dir: "/home/node/app"
+  #   volumes:
+  #     - ./api/:/home/node/app
+  #   command: "yarn queue"
+  #   networks:
+  #     net_back:
+  #       ipv4_address: 10.5.0.8
+  # react:
+  #   image: node:10.16
+  #   ports:
+  #     - '80:8080'
+  #   working_dir: '/home/react/app'
+  #   volumes:
+  #     - ./web/:/home/react/app
+  #   command: 'yarn start'
+  #   networks:
+  #     net_back:
+  #       ipv4_address: 10.5.0.7
+
+networks:
+  net_back:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.5.0.0/16
