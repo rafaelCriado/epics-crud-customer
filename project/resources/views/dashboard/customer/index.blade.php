@@ -45,7 +45,7 @@
                                 <center>
                                     No registered customers
                                     <br>
-                                    <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('customer.insert') }}">Add your first customer</a>
+                                    <a class="btn btn-sm btn-outline-success mb-2" href="{{ route('customer.insert') }}">Add a customer</a>
                                 </center>
                             @else
                                 <div class="table-responsive">
