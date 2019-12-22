@@ -85,15 +85,8 @@
                                                 </form>
                                                 </td>
                                                 <td>
-
-                                                    <form class="m-0 p-0" action="{{ route('customer.delete', $customer->id) }}" method="post">
-                                                        {!! csrf_field() !!}
-                                                        <input type="hidden" name="_method" value="delete" />
-
-                                                        <a class="btn btn-sm btn-info" href="{{ route('customer.update', $customer->id) }}">Edit</a>
-                                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                    </form>
-
+                                                    <a class="btn btn-sm btn-info" href="{{ route('customer.update', $customer->id) }}">Edit</a>
+                                                    <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="carregarModal({{$customer}})" data-toggle="modal" data-target="#exampleModal" >Delete</a>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -108,4 +101,44 @@
             </div>
         </div>
     </div>
+    <!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete <span id="modalName"></span></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Deseja realmente deletar esse item?
+        </div>
+        <div class="modal-footer">
+            <form id="formDelete" data-url="{{ url('/admin/customer') }}" class="m-0 p-0" action="1" method="POST">
+                {!! csrf_field() !!}
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnDelete" class="btn btn-danger">Delete</button>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+        function carregarModal(customer){
+            let form = document.getElementById('formDelete');
+            let action = `${form.getAttribute('data-url')}/${customer.id}`;
+
+            form.action = action;
+            document.getElementById('modalName').innerText = customer.name;
+        }
+    </script>
 @stop
+
+
