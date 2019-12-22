@@ -25,7 +25,7 @@
                     <div class="container-fluid">
                         @isset($search)
                             <div class="row">
-                                <h4>Busca por: {{$search}}</h4>
+                                <h4>Search for: {{$search}}</h4>
                             </div>
                         @endisset
                     </div>
@@ -101,34 +101,32 @@
             </div>
         </div>
     </div>
-    <!-- Button trigger modal -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete <span id="modalName"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <form id="formDelete" data-url="{{ url('/admin/customer') }}" class="m-0 p-0" action="1" method="POST">
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btnDelete" class="btn btn-danger">Delete</button>
+                </form>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Delete <span id="modalName"></span></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+            </div>
         </div>
-        <div class="modal-body">
-            Do you really want to delete this item?
         </div>
-        <div class="modal-footer">
-            <form id="formDelete" data-url="{{ url('/admin/customer') }}" class="m-0 p-0" action="1" method="POST">
-                {!! csrf_field() !!}
-                <input type="hidden" name="_method" value="DELETE" />
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="btnDelete" class="btn btn-danger">Delete</button>
-            </form>
-
-        </div>
-      </div>
     </div>
-  </div>
 
     <script>
         function carregarModal(customer){
