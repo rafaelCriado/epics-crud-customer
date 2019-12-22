@@ -115,7 +115,7 @@
           </button>
         </div>
         <div class="modal-body">
-          Deseja realmente deletar esse item?
+            Do you really want to delete this item?
         </div>
         <div class="modal-footer">
             <form id="formDelete" data-url="{{ url('/admin/customer') }}" class="m-0 p-0" action="1" method="POST">
